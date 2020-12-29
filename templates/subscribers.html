@@ -39,7 +39,7 @@ text {
 <!-- Code. -->
 
 
-  <div><text><h1>YouTube Hours Watched Trend - 2020 - Year 1 </h1></text></div>
+  <div><text><h1>YouTube Subscribers Trend - 2020 - Year 1 </h1></text></div>
    <div><text><h1>Quick Facts - {{ month_end_at }} Months of Activity</h1></text></div>
    <div><text><h1>Last Updated {{ one_month_ago.strftime('%m-%d-%Y') }}</h1></text></div>
   
@@ -55,9 +55,9 @@ text {
 
     </thead>
 
-      <td></td><td><canvas id="hourswatched" width="700" height="500"></canvas></td>
-      <td></td><td><canvas id="hourswatchedquarterly" width="700" height="500"></canvas></td>
-      <td></td><td><canvas id="hourswatchedannual" width="700" height="500"></canvas></td>
+      <td></td><td><canvas id="subscribers" width="700" height="500"></canvas></td>
+      <td></td><td><canvas id="subscribersquarterly" width="700" height="500"></canvas></td>
+      <td></td><td><canvas id="subscribersannual" width="700" height="500"></canvas></td>
      </td>
 
 
@@ -79,30 +79,30 @@ text {
                     {
                         fillColor : "#48A497",
                         strokeColor : "#48A4D1",
-                        data : {{ hours_watched }}
+                        data : {{ subscribers }}
                     }
                 ]
             }
 
             // get bar chart canvas
 
-            var hourswatched = document.getElementById("hourswatched").getContext("2d");
+            var subscribers = document.getElementById("subscribers").getContext("2d");
 
             // draw bar chart
 
-            var myBar = new Chart(hourswatched).Bar(barData, {
+            var myBar = new Chart(subscribers).Bar(barData, {
                 showTooltips: false,
                 onAnimationComplete: function () {
 
-                    var hourswatched = this.chart.hourswatched;
-                    hourswatched.font = this.scale.font;
-                    hourswatched.fillStyle = this.scale.textColor
-                    hourswatched.textAlign = "center";
-                    hourswatched.textBaseline = "bottom";
+                    var subscribers = this.chart.subscribers;
+                    subscribers.font = this.scale.font;
+                    subscribers.fillStyle = this.scale.textColor
+                    subscribers.textAlign = "center";
+                    subscribers.textBaseline = "bottom";
 
                     this.datasets.forEach(function (dataset) {
                         dataset.bars.forEach(function (bar) {
-                            hourswatched.fillText(bar.value, bar.x, bar.y - 5);
+                            subscribers.fillText(bar.value, bar.x, bar.y - 5);
                         });
                     })
                 }
@@ -123,23 +123,23 @@ text {
 
             // get bar chart canvas
 
-            var hourswatchedquarterly = document.getElementById("hourswatchedquarterly").getContext("2d");
+            var subscribersquarterly = document.getElementById("subscribersquarterly").getContext("2d");
 
             // draw bar chart
 
-            var myBar = new Chart(hourswatchedquarterly).Bar(barDataQ, {
+            var myBar = new Chart(subscribersquarterly).Bar(barDataQ, {
                 showTooltips: false,
                 onAnimationComplete: function () {
 
-                    var hourswatchedquarterly = this.chart.hourswatchedquarterly;
-                    hourswatchedquarterly.font = this.scale.font;
-                    hourswatchedquarterly.fillStyle = this.scale.textColor
-                    hourswatchedquarterly.textAlign = "center";
-                    hourswatchedquarterly.textBaseline = "bottom";
+                    var subscribersquarterly = this.chart.subscribersquarterly;
+                    subscribersquarterly.font = this.scale.font;
+                    subscribersquarterly.fillStyle = this.scale.textColor
+                    subscribersquarterly.textAlign = "center";
+                    subscribersquarterly.textBaseline = "bottom";
 
                     this.datasets.forEach(function (dataset) {
                         dataset.bars.forEach(function (bar) {
-                            hourswatchedquarterly.fillText(bar.value, bar.x, bar.y - 5);
+                            subscribersquarterly.fillText(bar.value, bar.x, bar.y - 5);
                         });
                     })
                 }
@@ -152,30 +152,30 @@ text {
                     {
                         fillColor : "#48A497",
                         strokeColor : "#48A4D1",
-                        data : [{{ hours_watched|sum() }}]
+                        data : [{{ subscribers|sum() }}]
                     }
                 ]
             }
 
             // get bar chart canvas
 
-            var hourswatchedannual = document.getElementById("hourswatchedannual").getContext("2d");
+            var subscribersannual = document.getElementById("subscribersannual").getContext("2d");
 
             // draw bar chart
 
-            var myBar = new Chart(hourswatchedannual).Bar(barDataA, {
+            var myBar = new Chart(subscribersannual).Bar(barDataA, {
                 showTooltips: false,
                 onAnimationComplete: function () {
 
-                    var hourswatchedannual = this.chart.hourswatchedannual;
-                    hourswatchedannual.font = this.scale.font;
-                    hourswatchedannual.fillStyle = this.scale.textColor
-                    hourswatchedannual.textAlign = "center";
-                    hourswatchedannual.textBaseline = "bottom";
+                    var subscribersannual = this.chart.subscribersannual;
+                    subscribersannual.font = this.scale.font;
+                    subscribersannual.fillStyle = this.scale.textColor
+                    subscribersannual.textAlign = "center";
+                    subscribersannual.textBaseline = "bottom";
 
                     this.datasets.forEach(function (dataset) {
                         dataset.bars.forEach(function (bar) {
-                            hourswatchedannual.fillText(bar.value, bar.x, bar.y - 5);
+                            subscribersannual.fillText(bar.value, bar.x, bar.y - 5);
                         });
                     })
                 }
@@ -189,58 +189,58 @@ text {
 <table class="center">
 
 <tr>
-  <td> <b>Monthly Goal (reached and exceeded December 2020):</b> </td><td> 333.33 hours </td>
-  <td> <b>Monthly Count:</b></td><td> {{ hours_watched }} </td>
+  <td> <b>Monthly Goal (reached and exceeded December 2020):</b> </td><td> 82.50 subscribers </td>
+  <td> <b>Monthly Count:</b></td><td> {{ subscribers }} </td>
 </tr>
 <tr>
-  <td><b>Quarterly Goal:</b></td>  <td> 1000 hours </td>
+  <td><b>Quarterly Goal:</b></td>  <td> 225 subscribers </td>
   <td><b>Quarter 1:</b> </td><td>{{ quarter1 }} </td>
   <td></td><td></td><td><b>Quarter 2:</b> </td><td>{{ quarter2 }} </td>
   <td></td><td></td><td><b>Quarter 3:</b> </td><td>{{ quarter3 }} </td>
   <td></td><td></td><td><b>Quarter 4:</b> </td><td>{{ quarter4 }} </td>
 </tr>
 <tr>
-  <td><b>Annual hours watched:</b> </th> <td> {{ hours_watched|sum() }} </td>
-  <td><b>12 Consecutive Months Goal:</b> </td> <td> 4000 hours </td>
+  <td><b>Annual subscribers:</b> </th> <td> {{ subscribers|sum() }} </td>
+  <td><b>12 Consecutive Months Goal:</b> </td> <td> 1000 subscribers </td>
   </tr>
 <tr>
    <td><b>Last 1 Month is after:</b> </th> <td> {{ one_month_ago.strftime('%m-%d-%Y') }}</td>
    <td><b>1 Month total:</b> </th> <td> {{ last_month }} </td>
-   <td><b>1 Month goal:</b> </th> <td> 333.33</td>
+   <td><b>1 Month goal:</b> </th> <td> 83.33</td>
    <td><b>1 Month variance:</b> </th> <td> {{ variance1 }}</td>
 </tr>
 <tr>
    <td><b>Last 3 Months is after:</b> </th> <td> {{ three_months_ago.strftime('%m-%d-%Y') }}</td>
    <td><b>3 Months total:</b> </th> <td> {{ three_months }} </td>
-   <td><b>3 Month goal:</b> </th> <td> 1000</td>
+   <td><b>3 Month goal:</b> </th> <td> 250</td>
    <td><b>3 Month variance:</b> </th> <td> {{ variance3 }}</td>
 <tr>
    <td><b>Last 6 Months is after:</b> </th> <td> {{ six_months_ago.strftime('%m-%d-%Y') }}</td>
    <td><b>6 Months total:</b> </th> <td> {{ six_months }} </td>
-   <td><b>6 Month goal:</b> </th> <td> 2000</td>
+   <td><b>6 Month goal:</b> </th> <td> 500</td>
    <td><b>6 Month variance:</b> </th> <td> {{ variance6 }}</td>
 </tr>
 <tr>
    <td><b>Last 9 Months is after:</b> </th> <td> {{ nine_months_ago.strftime('%m-%d-%Y') }}</td>
    <td><b>9 Months total:</b> </th> <td> {{ nine_months }} </td>
-   <td><b>9 Month goal:</b> </th> <td> 3000</td>
+   <td><b>9 Month goal:</b> </th> <td> 750</td>
    <td><b>9 Month variance:</b> </th> <td> {{ variance9 }}</td>
 </tr>
 <tr>
    <td><b>Last 12 Months is after:</b> </th> <td> {{ twelve_months_ago.strftime('%m-%d-%Y') }}</td>
    <td><b>12 Months total:</b> </th> <td> {{ twelve_months }} </td>
-   <td><b>12 Month goal:</b> </th> <td> 4000</td>
+   <td><b>12 Month goal:</b> </th> <td> 1000</td>
    <td><b>12 Months variance:</b> </th> <td> {{ variance12 }}</td>
    <!-- <td><b>12 Months variance:</b> </th> <td>  </td> -->
 </tr>
 <tr>
    <td><b>1 Month Projection: Prior Months is after:</b> </th> <td> {{ eleven_months_ago.strftime('%m-%d-%Y') }}</td>
    <td><b>Prior Months total:</b> </th> <td> {{ eleven_months }} </td>
-   <td><b>Last month, prior month, growth ratio, next month's projection, 11 months sum to use, new anticipated 12-month total:</b> </th> <td> {{ variance1g }} | {{ variance11 }} | {{ growthrate }} | {{next_month_projected}} | {{ month11p }} | {{next_month_projected_total}} </td>
+   <td><b>Last month, prior month, growth ratio, next month's projection, 11 months sum to use, new anticipated 12-month total, deficit, rough attainment timeframe:</b> </th> <td> {{ variance1g }} | {{ variance11 }} | {{ growthrate }} | <b>{{next_month_projected}}</b> | {{ month11p }} | {{next_month_projected_total}} | <b>{{ deficit }}</b> | <b>{{ rough_attainment_timeframe.strftime('%m-%d-%Y') }}  </b> </td>
    <!-- <td><b>12 Months variance:</b> </th> <td>  </td> -->
 </tr>
  <tr>
-   <td><b>Refreshed (UTC):</b> </th> <td> {{ current_time.strftime('%m-%d-%Y') }} </td><td>Variances from goal should shrink over the first year-and-a-half approximately.</td>
+   <td><b>Refreshed (UTC):</b> </th> <td> {{ current_time.strftime('%m-%d-%Y') }} </td><td>Variances from goal should shrink over the first year-and-a-half approximately. Goals were set to match the 1 year goal for hours but the 1000 subscribers could more realistically take an average active creator 17 months and the goal isn't a moving target like hours. </td>
 </tr>
 </table>
 

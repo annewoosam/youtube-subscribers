@@ -13,35 +13,35 @@ import model
 import server
 
 
-os.system('dropdb youtube_hours')
+os.system('dropdb youtube_subscribers')
 
-os.system('createdb youtube_hours')
+os.system('createdb youtube_subscribers')
 
 model.connect_to_db(server.app)
 
 model.db.create_all()
 
 
-# Create hour table's initial data.
+# Create subscriber table's initial data.
 
-with open('data/hour.json') as f:
+with open('data/subscribers.json') as f:
 
-    hour_data = json.loads(f.read())
+    subscriber_data = json.loads(f.read())
 
-hour_in_db = []
+subscriber_in_db = []
 
-for hour in hour_data:
-    channel_name, month_end_at, hours_watched, notes, last_updated= (
-                                   hour['channel_name'],
-                                   hour['month_end_at'],
-                                   hour['hours_watched'],
-                                   hour['notes'],
-                                   hour['last_updated'])
-    db_hour = crud.create_hour(
+for subscriber in subscriber_data:
+    channel_name, month_end_at, subscribers, notes, last_updated= (
+                                   subscriber['channel_name'],
+                                   subscriber['month_end_at'],
+                                   subscriber['subscribers'],
+                                   subscriber['notes'],
+                                   subscriber['last_updated'])
+    db_subscriber = crud.create_subscriber(
                                  channel_name,
                                  month_end_at,
-                                 hours_watched,
+                                 subscribers,
                                  notes,
                                  last_updated)
 
-    hour_in_db.append(db_hour)
+    subscriber_in_db.append(db_subscriber)
