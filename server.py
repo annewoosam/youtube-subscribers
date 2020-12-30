@@ -10,8 +10,9 @@ from sqlalchemy import func, Date, cast
 
 from datetime import date, datetime,timedelta
 
-from dateutil.relativedelta import relativedelta
+from pytz import timezone
 
+from dateutil.relativedelta import relativedelta
 
 db = SQLAlchemy()
 
@@ -62,7 +63,9 @@ def all_subscribers():
 
     total_subscribers=db.session.query(db.func.sum(Subscriber.subscribers)).group_by(Subscriber.subscribers)
 
-    current_time = datetime.utcnow()
+    now_utc = datetime.now(timezone('UTC'))
+
+    current_time = now_utc.astimezone(timezone('US/Pacific'))
 
     one_month_ago = current_time -  timedelta(1)
 
@@ -82,7 +85,7 @@ def all_subscribers():
 
     eleven_months_ago = current_time -  relativedelta(months=+1)
 
-    eleven_months = [q[0] for q in db.session.query(db.func.sum(Subscriber.subscribers)).filter(Subscriber.month_end_at > eleven_months_ago).all()]
+    eleven_months = [q[0] for q in db.session.query(db.func.sum(Subscriber.subscribers)).filter(Subscriber.month_end_at.between('2020-11-30','2020-11-30')).all()]
 
     eleven_months_ago_for_projection = current_time -  relativedelta(months=+10)
 
@@ -130,7 +133,7 @@ def all_subscribers():
 
     month11=int(result11)
 
-    variance11= int(result11)-int(result1)
+    variance11= int(result11)
 
     s11p = [str(i) for i in eleven_months_for_projection]
 
